@@ -1,0 +1,137 @@
+@import 'base';
+
+body{
+	background: #000;
+	display: grid;
+	place-items: center;
+	height: 100vh;
+}
+
+:root{
+	--before-property: calc(1vw + 2px);
+	--rainbow-1: #5d060b;
+	--rainbow-2: #880b0d;
+	--rainbow-3: #a10c0b;
+	--rainbow-4: #ad160b;
+	--rainbow-5: #b2250d;
+	--rainbow-6: #b73813;
+	--rainbow-7: #bc5218;
+	--rainbow-8: #bd6c21;
+	--rainbow-9: #c18427;
+	--rainbow-10: #bd952c;
+	--rainbow-11: #c5ad2a;
+	--rainbow-12: #bcc431;
+	--rainbow-13: #b4ce3b;
+	--rainbow-14: #93c92c;
+	--rainbow-15: #7cc834;
+	--rainbow-16: #5ec64c;
+	--rainbow-17: #3fc56a;
+	--rainbow-18: #2ec789;
+	--rainbow-19: #27c49e;
+	--rainbow-20: #24bcb2;
+	--rainbow-21: #25a9c2;
+	--rainbow-22: #2d8dbd;
+	--rainbow-23: #3c79bd;
+	--rainbow-24: #3d63b8;
+	--rainbow-25: #3b4faa;
+	--rainbow-26: #3c3a84;
+	--rainbow-27: #2c2958;
+	--rainbow-28: #1e1225;
+}
+
+@keyframes elvin-dance {
+	0%{
+		transform: translate(-50%,-50%) rotate(0deg);
+	}
+	50%{
+		transform: translate(-50%,-50%) rotate(180deg);
+	}
+	100%{
+		transform: translate(-50%,-50%) rotate(0deg);
+	}
+}
+
+@keyframes elvin-bounce {
+	0%{
+		top: 50%;
+	}
+	50%{
+		top: calc(50% + 1vw + 2px);
+	}
+	100%{
+		top: 50%;
+	}
+}
+
+
+.rainbow{    
+	.spectrum{
+		width: 90vw;
+		height: 90vh;
+		border-bottom: 1px solid #fff;
+		position: relative;
+		overflow: hidden;
+		perspective: 1000px;
+		transform-style: preserve-3d;
+		transform: rotateX(15deg) rotateY(15deg);
+		.elvin{
+			perspective: 1000px;
+			transform-style: preserve-3d;
+			position: absolute;
+			left: 50%; 
+			top: 100%;
+			transform: translate(-50%,-50%);
+			border: 2px solid;
+			&:before,&:after{
+				content:"";
+				width: var(--before-property);
+				height: var(--before-property);
+				border-radius: var(--before-property);
+				position: absolute;
+				left: -1px; 
+				top: 50%; 
+				transform: translateY(-100%) translateX(-50%);
+				z-index: 1;
+			}
+			&:after{
+				z-index: 2;
+			}
+			@for $j from 1 through 29 {
+				$red: random(255);
+				$green: random(255);
+				$blue: random(255);
+				
+				$change: 29 - $j;
+				&-#{$j}{
+					//random
+					//border-color: rgb($red, $green, $blue);
+					//random
+					border-color: var(--rainbow-#{$change});
+					&:before{
+						//random
+						//background: rgb($red, $green, $blue);
+						//random
+						background: var(--rainbow-#{$change});
+					}
+				}
+			} 
+			@for $i from 1 through 29{
+				$div: 29 - $i;
+				&-#{$div}{
+					width: calc(3vw * #{$div} + 50px);
+					height: calc(3vw * #{$div} + 50px);
+					border-radius: calc(3vw * #{$div} + 50px);
+				}
+			}
+			@for $ii from 1 through 29{
+				$jj: $ii * 100 + 8000;
+				&-#{$ii}{
+					animation: elvin-dance linear infinite #{$jj}ms;
+					&:before,&:after{
+						animation: elvin-bounce linear infinite #{$jj}ms; 
+					}
+				}
+			}
+		}
+	}
+}//rainbow
