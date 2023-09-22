@@ -124,7 +124,7 @@ body{
 				}
 			}
 			@for $ii from 1 through 29{
-				$jj: $ii * 100 + 8000;
+				$jj: $ii * 200 + 8000;
 				&-#{$ii}{
 					animation: elvin-dance linear infinite #{$jj}ms;
 					&:before,&:after{
