@@ -63,7 +63,40 @@ body{
 	}
 }
 
+@keyframes elvin-bounce-after {
+	0%{
+		opacity: 1;
+		top: 50%;
+	}
+	50%{
+		opacity: 0;
+		top: calc(50% + 1vw + 2px);
+	}
+	50.1%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+		top: 50%;
+	}
+}
 
+.links{
+	position: absolute;
+	left: 1rem;
+	top: 1rem; 
+	display: flex;
+	z-index: 53;
+	a{ 
+		display: block;
+		padding: 1rem;
+		color: #fff; 
+		transition: .4s; 
+		&:hover{
+			color: #e2ad00; 
+		}
+	}
+}
 .rainbow{    
 	.spectrum{
 		width: 90vw;
@@ -113,6 +146,9 @@ body{
 						//random
 						background: var(--rainbow-#{$change});
 					}
+					&:after{
+						background: #fff;
+					}
 				}
 			} 
 			@for $i from 1 through 29{
@@ -124,11 +160,14 @@ body{
 				}
 			}
 			@for $ii from 1 through 29{
-				$jj: $ii * 200 + 8000;
+				$jj: $ii * 100 + 8000;
 				&-#{$ii}{
 					animation: elvin-dance linear infinite #{$jj}ms;
 					&:before,&:after{
 						animation: elvin-bounce linear infinite #{$jj}ms; 
+					}
+					&:after{ 
+						animation: elvin-bounce-after linear infinite #{$jj}ms; 
 					}
 				}
 			}
